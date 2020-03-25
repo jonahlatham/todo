@@ -30,7 +30,7 @@ namespace toDoApi
         public void ConfigureServices (IServiceCollection services)
         {
             services.AddDbContext<CoreContext> (x => x.UseNpgsql (Configuration.GetConnectionString ("DefaultConnection")));
-
+            services.AddDbContext<DataContext> (x => x.UseNpgsql (Configuration.GetConnectionString ("DefaultConnection")));
             services.AddControllers ();
         }
 
