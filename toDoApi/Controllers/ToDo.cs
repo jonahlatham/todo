@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -26,9 +28,14 @@ namespace toDoApi.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public List<ToDo> Get ()
         {
-            return _context.ToDo.Select (e => new ToDo ()
+            var poop = Request.HttpContext.Request.Headers["Authorization"];
+            var tokenHandler = new JwtSecurityTokenHandler ();
+            var token = tokenHandler.ReadJwtToken (poop);
+            var id = token.Claims.FirstOrDefault ().Value;
+            return _context.ToDo.Where (e => e.UserId == Int16.Parse (id)).Select (e => new ToDo ()
             {
                 Id = e.Id,
                     Name = e.Name,

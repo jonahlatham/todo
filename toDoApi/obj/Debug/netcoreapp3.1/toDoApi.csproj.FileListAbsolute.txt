@@ -35,3 +35,11 @@
 /Users/jonahlatham/Documents/learning/HostedProjects/toDo/toDoApi/bin/Debug/netcoreapp3.1/Npgsql.dll
 /Users/jonahlatham/Documents/learning/HostedProjects/toDo/toDoApi/bin/Debug/netcoreapp3.1/Npgsql.EntityFrameworkCore.PostgreSQL.dll
 /Users/jonahlatham/Documents/learning/HostedProjects/toDo/toDoApi/obj/Debug/netcoreapp3.1/toDoApi.csproj.CopyComplete
+/Users/jonahlatham/Documents/learning/HostedProjects/toDo/toDoApi/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/jonahlatham/Documents/learning/HostedProjects/toDo/toDoApi/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/jonahlatham/Documents/learning/HostedProjects/toDo/toDoApi/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.Logging.dll
+/Users/jonahlatham/Documents/learning/HostedProjects/toDo/toDoApi/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.Protocols.dll
+/Users/jonahlatham/Documents/learning/HostedProjects/toDo/toDoApi/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/jonahlatham/Documents/learning/HostedProjects/toDo/toDoApi/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.Tokens.dll
+/Users/jonahlatham/Documents/learning/HostedProjects/toDo/toDoApi/bin/Debug/netcoreapp3.1/Newtonsoft.Json.dll
+/Users/jonahlatham/Documents/learning/HostedProjects/toDo/toDoApi/bin/Debug/netcoreapp3.1/System.IdentityModel.Tokens.Jwt.dll

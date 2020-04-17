@@ -1,9 +1,14 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 using toDoApi.Data;
 using toDoApi.Models;
@@ -18,8 +23,11 @@ namespace toDoApi.Controllers
         private readonly ILogger<AuthenticationController> _logger;
         private CoreContext _context;
 
-        public AuthenticationController (ILogger<AuthenticationController> logger, CoreContext context)
+        private readonly IConfiguration _config;
+
+        public AuthenticationController (ILogger<AuthenticationController> logger, CoreContext context, IConfiguration config)
         {
+            _config = config;
             _logger = logger;
             _context = context;
         }
@@ -69,7 +77,7 @@ namespace toDoApi.Controllers
 
         // https://localhost:5001/authentication/login
         [HttpPost ("login")]
-        public User Login (User user)
+        public IActionResult Login (User user)
         {
             var youzer = _context.User.FirstOrDefault (x => x.Email == user.Email);
 
@@ -79,11 +87,37 @@ namespace toDoApi.Controllers
             if (!VerifyPasswordHash (user.Password, youzer.Password, youzer.Salt))
                 return null;
 
-            return new User ()
+            var userFromRepo = new User ()
             {
                 Id = youzer.Id,
-                    Email = youzer.Email
+                Email = youzer.Email
             };
+            if (userFromRepo == null)
+                return Unauthorized ();
+
+            var claims = new []
+            {
+                new Claim (ClaimTypes.NameIdentifier, userFromRepo.Id.ToString ()),
+                new Claim (ClaimTypes.Name, userFromRepo.Email)
+            };
+            var key = new SymmetricSecurityKey (Encoding.UTF8.GetBytes (_config.GetSection ("AppSettings:Token").Value));
+
+            var creds = new SigningCredentials (key, SecurityAlgorithms.HmacSha512Signature);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity (claims),
+                Expires = DateTime.Now.AddDays (1),
+                SigningCredentials = creds
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler ();
+            var token = tokenHandler.CreateToken (tokenDescriptor);
+
+            return Ok (new
+            {
+                token = tokenHandler.WriteToken (token)
+            });
         }
 
         private bool VerifyPasswordHash (string password, byte[] passwordHash, byte[] passwordSalt)

@@ -31,7 +31,11 @@ namespace toDoApi.Data
             {
                 entity.Property (e => e.Id).HasDefaultValueSql ("nextval('\"untitled_table_Id_seq\"'::regclass)");
 
+                entity.Property (e => e.UserId).HasDefaultValueSql ("int");
+
                 entity.Property (e => e.Name).HasColumnType ("character varying");
+
+                entity.Property (e => e.IsComplete).HasColumnType ("bool");
             });
 
             modelBuilder.Entity<User> (entity =>
