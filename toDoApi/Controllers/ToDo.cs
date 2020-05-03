@@ -31,11 +31,8 @@ namespace toDoApi.Controllers
         [Authorize]
         public List<ToDo> Get ()
         {
-            var poop = Request.HttpContext.Request.Headers["Authorization"];
-            var tokenHandler = new JwtSecurityTokenHandler ();
-            var token = tokenHandler.ReadJwtToken (poop);
-            var id = token.Claims.FirstOrDefault ().Value;
-            return _context.ToDo.Where (e => e.UserId == Int16.Parse (id)).Select (e => new ToDo ()
+            var id = int.Parse (User.Claims.FirstOrDefault (i => i.Type == "id").Value);
+            return _context.ToDo.Where (e => e.UserId == id).Select (e => new ToDo ()
             {
                 Id = e.Id,
                     Name = e.Name,
