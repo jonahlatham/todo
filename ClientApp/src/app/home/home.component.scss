@@ -1,0 +1,17 @@
+.home-App {
+    padding: 50px;
+    text-align: center;
+    .home-form-field {
+        width: 85%;
+        margin: auto;
+    }
+    .home-todos {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+.material-icons {
+    color: #673ab6;
+}
