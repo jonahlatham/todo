@@ -49,12 +49,13 @@ namespace todo.Services
         public void PutTodo(Models.ToDo body)
         {
             var results = _context.ToDo.Where(e => e.Id == body.Id).SingleOrDefault();
-            results.IsComplete = results.IsComplete == true ? false : true;
+            results.IsComplete = body.IsComplete;
             if (body.Item != results.Item)
             {
                 results.Item = body.Item;
             }
             _context.SaveChanges();
         }
+
     }
 }

@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Edit "{{oldItem}}"</h1>
+<div mat-dialog-content>
+  <p>What should this task say?</p>
+  <mat-form-field>
+    <mat-label>Todo</mat-label>
+    <input matInput [(ngModel)]="data.item">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button color="primary" mat-raised-button matSuffix [mat-dialog-close]="data.item" cdkFocusInitial 
+  [disabled]="!data.item">Submit Change</button>
+</div>

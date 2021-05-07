@@ -1,22 +1,40 @@
 <div class="home-App">
 
-  <mat-card>
-    <form>
-      <mat-form-field class="home-form-field">
+  <mat-card class="home-card">
+    <div class="home-input-container">
+      <mat-form-field class="home-form-field" appearance="none">
         <mat-label>Add Item</mat-label>
-        <input matInput placeholder="To Do">
+        <input matInput placeholder="To Do" [(ngModel)]="value">
       </mat-form-field>
-    </form>
 
-    <mat-card class="home-form-field">
+      <button color="primary" (click)="addTodo()" mat-icon-button color="primary"
+        aria-label="Example icon button with a home icon">
+        <span class="material-icons">add_circle</span>
+      </button>
+    </div>
 
-      <div class="home-todos">
-        
+    <mat-card *ngIf="todos" class="todo-mat-card">
+      <div class="home-form-field" *ngFor="let x of todos">
+        <div class="home-todos">
+          <button (click)="makeComplete(x.id, x.item, x.isComplete)" mat-icon-button color="primary"
+            aria-label="Example icon button with a home icon">
+            <span class="material-icons">{{x.isComplete ? "check_circle" : "radio_button_unchecked"}}</span>
+          </button>
+          <div class="todo-item">{{x.item}}</div>
+          <div>
+            <button (click)="openEditDialog(x.id, x.item, x.isComplete)" mat-icon-button color="primary"
+              aria-label="Example icon button with a home icon">
+              <span class="material-icons">edit</span>
+            </button>
+            <button (click)="deleteTodo(x.id, x.item)" mat-icon-button color="primary"
+              aria-label="Example icon button with a home icon">
+              <span class="material-icons">delete</span>
+            </button>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
       </div>
-
     </mat-card>
+
   </mat-card>
-
 </div>
-
-

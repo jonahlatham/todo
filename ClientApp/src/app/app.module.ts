@@ -7,14 +7,16 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule, MatFormFieldModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
+import { HomeEditDialogComponent } from './home/home-edit-dialog/home-edit-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    HomeEditDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -27,9 +29,18 @@ import { MatSliderModule } from '@angular/material/slider';
     MatFormFieldModule,
     MatInputModule,
     MatSliderModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatSnackBarModule,
+    MatDialogModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2300}}
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [
+    HomeEditDialogComponent
+  ]
 })
 export class AppModule { }

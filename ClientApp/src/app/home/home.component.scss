@@ -1,17 +1,40 @@
 .home-App {
     padding: 50px;
     text-align: center;
-    .home-form-field {
-        width: 85%;
+    .home-card {
+        max-width: 700px;
         margin: auto;
+        .home-input-container {
+            display: flex;
+            justify-content: space-between;
+            .home-form-field {
+                width: 90%;
+                margin: auto;
+                text-align: center;
+            }
+        }
     }
-    .home-todos {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-    }
+}
+
+.home-todos {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .material-icons {
     color: #673ab6;
+}
+
+button:focus {
+    outline: none;
+}
+
+.todo-mat-card {
+    padding: 1px;
+}
+
+.todo-item {
+    font-size: x-large;
+    color: #673ab5;
 }

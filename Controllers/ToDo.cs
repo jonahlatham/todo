@@ -37,7 +37,7 @@ namespace toDo.Controllers
         }
 
         [HttpPut]
-        public void PutTodo([FromBody] ToDo body)
+        public void PutTodoComplete([FromBody] ToDo body)
         {
             _toDoService.PutTodo(body);
         }
